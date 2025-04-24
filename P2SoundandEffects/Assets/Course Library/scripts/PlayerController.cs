@@ -22,9 +22,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isOnGround = true;
+            isOnGround = false;
         }
     }
+   
     private void OnCollisionEnter(Collision collision)
     {
         isOnGround = true;
