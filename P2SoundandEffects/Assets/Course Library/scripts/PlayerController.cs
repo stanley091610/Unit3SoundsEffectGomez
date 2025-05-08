@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             doubleSpeed = true;
-            playerAnim.SetFloat("Speed_Muultiplier", 2.0f);
+            playerAnim.SetFloat("Speed_Multiplier", 2.0f);
         }
         else if (doubleSpeed)
         {
@@ -53,10 +53,12 @@ public class PlayerController : MonoBehaviour
             doubleJumpUsed = false;
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !isOnGround && !doubleJumpUsed)
-        doubleJumpUsed = true;
-        playerRb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
-        playerAnim.Play("Running_Jump", 3, 0f);
-        playerAudio.PlayOneShot(jumpSound, 1.0f);
+        {
+            doubleJumpUsed = true;
+            playerRb.AddForce(Vector3.up * doubleJumpForce, ForceMode.Impulse);
+            playerAnim.Play("Running_Jump", 3, 0f);
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
+        }
     }
    
     private void OnCollisionEnter(Collision collision)
@@ -67,7 +69,8 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
             dirtParticle.Play();
-        } else if (collision.gameObject.CompareTag("Obstacle"))
+        }  
+        else if (collision.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("Game Over!");
             gameOver = true;
